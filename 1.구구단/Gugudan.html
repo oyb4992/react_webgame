@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>구구단</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- JSX를 사용하기 위해선 필요. -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      'use strict';
+      const GuGuDan = () => { //use로 시작하는것(useState, useRef 등)이 ReactHooks이다. ReactHooks를 사용하는걸 권장.
+        const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+        const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+        const [value, setValue] = React.useState('');
+        const [result, setResult] = React.useState('');
+        const inputRef = React.useRef(null);
+        
+        const onSubmitForm = (e) => {
+          e.preventDefault();
+          inputRef.current.focus();
+          if(parseInt(value) !== first * second) {
+            setResult('땡');
+            setValue('');
+            return;
+          }
+          setResult(`정답: ${value}`);
+          setFirst(Math.ceil(Math.random() * 9));
+          setSecond(Math.ceil(Math.random() * 9));
+          setValue('');
+          return;
+        }
+        const onChangeInput = (e) => setValue(e.target.value);
+
+        console.log('렌더링');
+        return ( //JSX 작성시에 가능하면 js와 함께 작성하지 않도록 한다.
+            <React.Fragment> {/* <> </> 으로 사용할 수 있으나 바벨이 제대로 인식을 하지 못하여 다음과 같이 사용함 */}
+              <div>{first} X {second} = ? </div>
+              <form onSubmit={onSubmitForm}>
+                <input 
+                  ref ={inputRef}  
+                  type="number" 
+                  value={value} 
+                  onChange={onChangeInput} 
+                />
+                <button>입력!</button>
+              </form>
+              <div>{result}</div>
+            </React.Fragment>
+        );
+      }
+    </script>
+    <script type="text/babel">
+      //ReactDOM.render(<GuGuDan/>, document.querySelector('#root')); //React 17 버전 코드
+      ReactDOM.createRoot(document.querySelector('#root')).render(<GuGuDan />); //React 18 버전 코드
+    </script>
+  </body>
+</html>
