@@ -6,4 +6,9 @@ const ReactDOM = require('react-dom/client');
 
 const NumberBaseball = require('./NumberBaseball');
 
-ReactDOM.createRoot(document.querySelector('#root')).render(<NumberBaseball />);
+const root = ReactDOM.createRoot(document.querySelector('#root'));
+root.render(
+  <React.StrictMode>
+    <NumberBaseball />
+  </React.StrictMode>,
+);
