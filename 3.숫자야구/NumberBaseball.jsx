@@ -1,5 +1,5 @@
 const React = require('react');
-const { useState, useRef } = React; //exports 되는게 객체나 배열이면 구조 분해 가능.
+const { useState, useRef, memo } = React; //exports 되는게 객체나 배열이면 구조 분해 가능.
 
 const NumberBaseball = () => {
   const [result, setResult] = useState('');
@@ -113,14 +113,17 @@ const NumberBaseball = () => {
     </>
   );
 };
-
-const Try = ({ tryInfo }) => {
+//memo 사용시 부모 컴포넌트가 렌더링이 되어도 자식 컴포넌트까진 영향이 가지 않게 된다. 
+//두번째 인자값으로 커스텀하여 사용가능.
+//hooks React.memo = class PureComponent
+const Try = memo(({ tryInfo }) => { 
   return (
     <li>
       <div>{tryInfo.try}</div>
       <div>{tryInfo.result}</div>
     </li>
   );
-}
+});
+Try.displayName = 'Try'; //memo 사용시 개발자 도구에서 컴포넌트명이 이상하게 나오게되는 것을 방지하기 위함.
 
 module.exports = NumberBaseball;
