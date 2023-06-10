@@ -1,6 +1,6 @@
 //webpack 공식: https://webpack.kr/concepts/#plugins
 const path = require('path');
-const webpack = require('webpack');
+//const webpack = require('webpack');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 //package.json에 react-refresh, @pmmmwh/react-refresh-webpack-plugin 없어도 바로 반영은 되나 이것은 리로딩(새로고침)
 //두개를 추가하여 설정을 잡으면 핫리로딩이 된다. 이 경우엔 리로딩과 달리 컴포넌트에 데이터가 초기화 되지 않는다.
